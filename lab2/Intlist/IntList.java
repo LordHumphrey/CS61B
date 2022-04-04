@@ -1,3 +1,5 @@
+package Intlist;
+
 import java.util.Formatter;
 
 /**
@@ -5,7 +7,7 @@ import java.util.Formatter;
  * with a large number of additional methods.
  *
  * @author P. N. Hilfinger, with some modifications by Josh Hug and melaniecebula
- *         [Do not modify this file.]
+ * [Do not modify this file.]
  */
 public class IntList {
     /**
@@ -29,7 +31,7 @@ public class IntList {
      * A List with null rest, and first = 0.
      */
     public IntList() {
-    /* NOTE: public IntList () { }  would also work. */
+        /* NOTE: public IntList () { }  would also work. */
         this(0, null);
     }
 
@@ -82,7 +84,12 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        IntList temp = A;
+        while (temp != null) {
+            temp = temp.rest;
+        }
+        temp = B;
+        return A;
     }
 
     /**
@@ -91,34 +98,18 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
-    }
+        IntList newList = new IntList(A.first, null);
+        IntList temp1 = A;
+        IntList temp2 = newList;
+        while (temp1.rest != null) {
+            temp1 = temp1.rest;
+            temp2.rest = new IntList(temp1.first, null);
+            temp2 = temp2.rest;
+        }
 
+        temp2.rest = B;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * DO NOT MODIFY ANYTHING BELOW THIS LINE! Many of the concepts below here
-     * will be introduced later in the course or feature some form of advanced
-     * trickery which we implemented to help make your life a little easier for
-     * the lab.
-     */
-
-    @Override
-    public int hashCode() {
-        return first;
+        return newList;
     }
 
     /**
@@ -139,6 +130,18 @@ public class IntList {
             p.rest = new IntList(args[k], null);
         }
         return result;
+    }
+
+    /**
+     * DO NOT MODIFY ANYTHING BELOW THIS LINE! Many of the concepts below here
+     * will be introduced later in the course or feature some form of advanced
+     * trickery which we implemented to help make your life a little easier for
+     * the lab.
+     */
+
+    @Override
+    public int hashCode() {
+        return first;
     }
 
     /**
@@ -209,8 +212,7 @@ public class IntList {
 
     @Override
     /** Outputs the IntList as a String. You are not expected to read
-     * or understand this method. */
-    public String toString() {
+     * or understand this method. */ public String toString() {
         Formatter out = new Formatter();
         String sep;
         sep = "(";
@@ -231,4 +233,3 @@ public class IntList {
         return out.toString();
     }
 }
-
